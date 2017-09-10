@@ -1,30 +1,28 @@
 import React, { Component } from 'react';
 import bind from 'react-autobind';
 
-class Walker extends Component {
+class Backdrop extends Component {
   constructor(props) {
     super(props);
-    this.walker = window.PIXI.Sprite.fromImage('assets/sprites/mario.png');
-    const walker = this.walker;
-    walker.anchor.set(0.5);
-    walker.scale.y = 0.25;
-    walker.scale.x = 0.25;
+    this.backdrop = window.PIXI.Sprite.fromImage('assets/sprites/office_building_total_01.png');
+    const backdrop = this.backdrop;
+    backdrop.anchor.set(0);
     bind(this);
   }
 
   componentDidMount() {
     const app = this.props.app;
-    app.stage.addChild(this.walker);
+    app.stage.addChild(this.backdrop);
   }
 
   setPosition(x, y) {
-    this.walker.x = x;
-    this.walker.y = y;
+    this.backdrop.x = x;
+    this.backdrop.y = y;
   }
 
   setScale(scale) {
-    this.walker.scale.x = scale;
-    this.walker.scale.y = scale;
+    this.backdrop.scale.x = scale;
+    this.backdrop.scale.y = scale;
   }
 
   render() {
@@ -37,4 +35,4 @@ class Walker extends Component {
   }
 }
 
-export default Walker;
+export default Backdrop;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Walker from './walker';
+import Backdrop from './backdrop';
 
 class Prototype01 extends Component {
   constructor() {
@@ -9,7 +10,7 @@ class Prototype01 extends Component {
     this.state = {
       position: {
         x: 200,
-        y: 400,
+        y: 420,
       },
     };
   }
@@ -26,13 +27,13 @@ class Prototype01 extends Component {
 
   moveRight() {
     this.app.ticker.add((delta) => {
-      if (this.state.position.x > 1080) {
+      if (this.state.position.x > 1000) {
         return;
       }
 
       this.setState({
         position: {
-          x: this.state.position.x + 1,
+          x: this.state.position.x + 5,
           y: this.state.position.y,
         },
       });
@@ -41,11 +42,19 @@ class Prototype01 extends Component {
 
   render() {
     return (
-      <div ref={thisDiv => this.gameCanvas = thisDiv}>
+      <div
+        id="prototype01"
+        ref={thisDiv => this.gameCanvas = thisDiv}
+      >
+        <Backdrop
+          app={this.app}
+          position={{ x: 0, y: 0 }}
+          scale={3}
+        />
         <Walker
           app={this.app}
           position={this.state.position}
-          scale={0.25}
+          scale={0.14}
         />
       </div>
     );
