@@ -1,19 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
 import bind from 'react-autobind';
 
-class Walker extends Component {
+class Walker extends React.Component {
   constructor(props) {
     super(props);
-    this.walker = window.PIXI.Sprite.fromImage('assets/sprites/mario.png');
-    const walker = this.walker;
-    walker.anchor.set(0.5);
-    walker.scale.y = 0.25;
-    walker.scale.x = 0.25;
     bind(this);
+    this.walker = {};
+    this.initializeSprite();
   }
 
   componentDidMount() {
     const app = this.props.app;
+    app.stage.addChild(this.walker);
+  }
+
+  initializeSprite() {
+    const app = this.props.app;
+    const frames = [];
+    for (let i = 0; i < 6; i++) {
+      frames.push(window.PIXI.Texture.fromFrame(`scott_pilgrim_spritesheet_walking_01 ${i}.ase`))
+    }
+    this.walker = new window.PIXI.extras.AnimatedSprite(frames);
+    this.walker.x = this.props.position.x;
+    this.walker.y = this.props.position.y;
+    this.walker.anchor.set(0.5);
+    this.walker.animationSpeed = 0.1;
+    this.walker.scale.x = 3;
+    this.walker.scale.y = 3;
+    this.walker.play();
     app.stage.addChild(this.walker);
   }
 

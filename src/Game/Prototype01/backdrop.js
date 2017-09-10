@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import bind from 'react-autobind';
 
-class Backdrop extends Component {
+class Backdrop extends React.Component {
   constructor(props) {
     super(props);
     this.backdrop = window.PIXI.Sprite.fromImage('assets/sprites/office_building_total_01.png');

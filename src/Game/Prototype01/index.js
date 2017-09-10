@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Walker from './walker';
 import Backdrop from './backdrop';
 
-class Prototype01 extends Component {
+class Prototype01 extends React.Component {
   constructor() {
     super();
     this.app = new window.PIXI.Application(1280, 720);
@@ -54,7 +54,7 @@ class Prototype01 extends Component {
         <Walker
           app={this.app}
           position={this.state.position}
-          scale={0.14}
+          scale={3}
         />
       </div>
     );
