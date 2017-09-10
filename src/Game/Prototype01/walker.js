@@ -8,13 +8,11 @@ class Walker extends Component {
     this.walker.anchor.set(0.5);
     this.walker.scale.y = 0.25;
     this.walker.scale.x = 0.25;
-    console.log(this.walker.scale);
     bind(this);
   }
 
   componentDidMount() {
     const app = this.props.app;
-    console.log('app', app);
     app.stage.addChild(this.walker);
   }
 
