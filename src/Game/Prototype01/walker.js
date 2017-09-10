@@ -29,7 +29,6 @@ class Walker extends Component {
   }
 
   render() {
-    console.log('walker rendering');
     const x = this.props.position.x;
     const y = this.props.position.y;
     const scale = this.props.scale;

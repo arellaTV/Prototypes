@@ -25,18 +25,18 @@ class Prototype01 extends Component {
   }
 
   moveRight() {
-    const interval = setInterval(() => {
+    this.app.ticker.add((delta) => {
       if (this.state.position.x > 1080) {
-        clearInterval(interval);
+        return;
       }
 
       this.setState({
         position: {
-          x: this.state.position.x + 10,
+          x: this.state.position.x + 1,
           y: this.state.position.y,
         },
       });
-    }, 16);
+    })
   }
 
   render() {
