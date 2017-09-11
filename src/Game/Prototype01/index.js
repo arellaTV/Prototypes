@@ -10,11 +10,32 @@ class Prototype01 extends React.Component {
 
     this.state = {
       fps: 0,
-      isWalking: true,
-      position: {
-        x: 200,
-        y: 510,
-      },
+      walkers: [
+        {
+          id: 0,
+          position: {
+            x: 200,
+            y: 510,
+          },
+          isWalking: true,
+        },
+        {
+          id: 1,
+          position: {
+            x: -200,
+            y: 510,
+          },
+          isWalking: true,
+        },
+        {
+          id: 2,
+          position: {
+            x: -400,
+            y: 510,
+          },
+          isWalking: true,
+        }
+      ],
     };
   }
 
@@ -30,17 +51,19 @@ class Prototype01 extends React.Component {
 
   moveRight() {
     this.app.ticker.add((delta) => {
-      if (this.state.position.x > 1000) {
-        this.setState({ isWalking: false });
-        return;
-      }
+      const fps =  Math.round(this.app.ticker.FPS);
+      const walkers = this.state.walkers.map(walker => {
+        if (walker.position.x > 1000) {
+          walker.isWalking = false;
+        } else {
+          walker.position.x += 5;
+        }
+        return walker;
+      });
 
       this.setState({
-        position: {
-          x: this.state.position.x + 5,
-          y: this.state.position.y,
-        },
-        fps: Math.round(this.app.ticker.FPS),
+        fps,
+        walkers,
       });
     })
   }
@@ -56,12 +79,15 @@ class Prototype01 extends React.Component {
           position={{ x: 0, y: 0 }}
           scale={3}
         />
-        <Walker
-          app={this.app}
-          position={this.state.position}
-          scale={3}
-          isWalking={this.state.isWalking}
-        />
+        {this.state.walkers.map(walker => (
+          <Walker
+            app={this.app}
+            key={walker.id}
+            position={walker.position}
+            scale={3}
+            isWalking={walker.isWalking}
+          />
+        ))}
         <FPSCounter
           app={this.app}
           color={'white'}
