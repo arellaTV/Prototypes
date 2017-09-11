@@ -1,6 +1,7 @@
 import React from 'react';
 import Walker from './walker';
 import Backdrop from './backdrop';
+import FPSCounter from './FPScounter';
 
 class Prototype01 extends React.Component {
   constructor() {
@@ -8,9 +9,11 @@ class Prototype01 extends React.Component {
     this.app = new window.PIXI.Application(1280, 720);
 
     this.state = {
+      fps: 0,
+      isWalking: true,
       position: {
         x: 200,
-        y: 420,
+        y: 510,
       },
     };
   }
@@ -28,6 +31,7 @@ class Prototype01 extends React.Component {
   moveRight() {
     this.app.ticker.add((delta) => {
       if (this.state.position.x > 1000) {
+        this.setState({ isWalking: false });
         return;
       }
 
@@ -36,6 +40,7 @@ class Prototype01 extends React.Component {
           x: this.state.position.x + 5,
           y: this.state.position.y,
         },
+        fps: Math.round(this.app.ticker.FPS),
       });
     })
   }
@@ -55,6 +60,14 @@ class Prototype01 extends React.Component {
           app={this.app}
           position={this.state.position}
           scale={3}
+          isWalking={this.state.isWalking}
+        />
+        <FPSCounter
+          app={this.app}
+          color={'white'}
+          position={{ x: 10, y: 10 }}
+          scale={1}
+          fps={this.state.fps}
         />
       </div>
     );

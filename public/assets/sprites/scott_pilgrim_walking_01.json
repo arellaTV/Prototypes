@@ -1,5 +1,5 @@
 { "frames": {
-   "scott_pilgrim_spritesheet_walking_01 0.ase": {
+   "scott_pilgrim_walking_01 0.ase": {
     "frame": { "x": 0, "y": 0, "w": 38, "h": 63 },
     "rotated": false,
     "trimmed": false,
@@ -7,7 +7,7 @@
     "sourceSize": { "w": 38, "h": 63 },
     "duration": 100
    },
-   "scott_pilgrim_spritesheet_walking_01 1.ase": {
+   "scott_pilgrim_walking_01 1.ase": {
     "frame": { "x": 38, "y": 0, "w": 38, "h": 63 },
     "rotated": false,
     "trimmed": false,
@@ -15,7 +15,7 @@
     "sourceSize": { "w": 38, "h": 63 },
     "duration": 100
    },
-   "scott_pilgrim_spritesheet_walking_01 2.ase": {
+   "scott_pilgrim_walking_01 2.ase": {
     "frame": { "x": 76, "y": 0, "w": 38, "h": 63 },
     "rotated": false,
     "trimmed": false,
@@ -23,7 +23,7 @@
     "sourceSize": { "w": 38, "h": 63 },
     "duration": 100
    },
-   "scott_pilgrim_spritesheet_walking_01 3.ase": {
+   "scott_pilgrim_walking_01 3.ase": {
     "frame": { "x": 114, "y": 0, "w": 38, "h": 63 },
     "rotated": false,
     "trimmed": false,
@@ -31,7 +31,7 @@
     "sourceSize": { "w": 38, "h": 63 },
     "duration": 100
    },
-   "scott_pilgrim_spritesheet_walking_01 4.ase": {
+   "scott_pilgrim_walking_01 4.ase": {
     "frame": { "x": 152, "y": 0, "w": 38, "h": 63 },
     "rotated": false,
     "trimmed": false,
@@ -39,7 +39,7 @@
     "sourceSize": { "w": 38, "h": 63 },
     "duration": 100
    },
-   "scott_pilgrim_spritesheet_walking_01 5.ase": {
+   "scott_pilgrim_walking_01 5.ase": {
     "frame": { "x": 190, "y": 0, "w": 38, "h": 63 },
     "rotated": false,
     "trimmed": false,
@@ -51,7 +51,7 @@
  "meta": {
   "app": "http://www.aseprite.org/",
   "version": "1.2-beta12",
-  "image": "/assets/sprites/scott_pilgrim_spritesheet_walking_01.png",
+  "image": "/assets/sprites/scott_pilgrim_walking_01.png",
   "format": "RGBA8888",
   "size": { "w": 228, "h": 63 },
   "scale": "1",

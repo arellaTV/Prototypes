@@ -6,6 +6,7 @@ class Walker extends React.Component {
     super(props);
     bind(this);
     this.walker = {};
+    this.loadAnimations();
     this.initializeSprite();
   }
 
@@ -14,16 +15,23 @@ class Walker extends React.Component {
     app.stage.addChild(this.walker);
   }
 
+  loadAnimations() {
+    this.walkingFrames = [];
+    this.idleFrames = [];
+    for (let i = 0; i < 6; i++) {
+      this.walkingFrames.push(window.PIXI.Texture.fromFrame(`scott_pilgrim_walking_01 ${i}.ase`));
+    }
+    for (let i = 0; i < 8; i++) {
+      this.idleFrames.push(window.PIXI.Texture.fromFrame(`scott_pilgrim_idle ${i}.ase`));
+    }
+  }
+
   initializeSprite() {
     const app = this.props.app;
-    const frames = [];
-    for (let i = 0; i < 6; i++) {
-      frames.push(window.PIXI.Texture.fromFrame(`scott_pilgrim_spritesheet_walking_01 ${i}.ase`))
-    }
-    this.walker = new window.PIXI.extras.AnimatedSprite(frames);
+    this.walker = new window.PIXI.extras.AnimatedSprite(this.walkingFrames);
     this.walker.x = this.props.position.x;
     this.walker.y = this.props.position.y;
-    this.walker.anchor.set(0.5);
+    this.walker.anchor.set(0.5, 1);
     this.walker.animationSpeed = 0.1;
     this.walker.scale.x = 3;
     this.walker.scale.y = 3;
@@ -36,17 +44,19 @@ class Walker extends React.Component {
     this.walker.y = y;
   }
 
-  setScale(scale) {
-    this.walker.scale.x = scale;
-    this.walker.scale.y = scale;
+  updateAnimation(isWalking) {
+    if (!isWalking && this.walker.textures === this.walkingFrames) {
+      this.walker.textures = this.idleFrames;
+      this.walker.play();
+    }
   }
 
   render() {
     const x = this.props.position.x;
     const y = this.props.position.y;
-    const scale = this.props.scale;
+    const isWalking = this.props.isWalking;
     this.setPosition(x, y);
-    this.setScale(scale);
+    this.updateAnimation(isWalking);
     return null;
   }
 }

@@ -6,7 +6,8 @@ class App extends Component {
   constructor() {
     super();
     this.loader = window.PIXI.loader;
-    this.loader.add('scott_pilgrim_spritesheet_walking_01', 'assets/sprites/scott_pilgrim_spritesheet_walking_01.json');
+    this.loader.add('scott_pilgrim_walking_01', 'assets/sprites/scott_pilgrim_walking_01.json');
+    this.loader.add('scott_pilgrim_idle_01', 'assets/sprites/scott_pilgrim_idle_01.json');
     this.loader.load();
     this.state = {
       isLoadComplete: false,
