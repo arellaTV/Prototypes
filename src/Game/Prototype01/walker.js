@@ -35,7 +35,9 @@ class Walker extends React.Component {
     this.walker.animationSpeed = 0.1;
     this.walker.scale.x = 3;
     this.walker.scale.y = 3;
-    this.walker.play();
+
+    const randomFrame = Math.floor(Math.random() * 6);
+    this.walker.gotoAndPlay(randomFrame);
     app.stage.addChild(this.walker);
   }
 
