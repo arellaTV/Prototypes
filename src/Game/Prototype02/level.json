@@ -1,0 +1,28 @@
+{
+  "walkers": [
+    {
+      "id": 0,
+      "position": {
+        "x": 200,
+        "y": 510
+      },
+      "isWalking": true
+    },
+    {
+      "id": 1,
+      "position": {
+        "x": -200,
+        "y": 510
+      },
+      "isWalking": true
+    },
+    {
+      "id": 2,
+      "position": {
+        "x": -400,
+        "y": 510
+      },
+      "isWalking": true
+    }
+  ]
+}

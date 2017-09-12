@@ -71,7 +71,7 @@ class Prototype01 extends React.Component {
   render() {
     return (
       <div
-        id="prototype01"
+        className="prototype"
         ref={thisDiv => this.gameCanvas = thisDiv}
       >
         <Backdrop

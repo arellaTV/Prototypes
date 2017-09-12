@@ -25,7 +25,7 @@
   margin: 0px;
 }
 
-#prototype01 canvas {
+.prototype canvas {
   width: 70%;
 }
 
@@ -42,7 +42,7 @@
     display: none;
   }
 
-  #prototype01 canvas {
+  .prototype canvas {
     width: 100%;
   }
 }
