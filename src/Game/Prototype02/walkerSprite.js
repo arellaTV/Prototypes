@@ -5,14 +5,14 @@ class WalkerSprite extends React.Component {
   constructor(props) {
     super(props);
     bind(this);
-    this.walker = {};
+    this.walkerSprite = {};
     this.loadAnimations();
     this.initializeSprite();
   }
 
   componentDidMount() {
     const app = this.props.app;
-    app.stage.addChild(this.walker);
+    app.stage.addChild(this.walkerSprite);
   }
 
   loadAnimations() {
@@ -28,28 +28,28 @@ class WalkerSprite extends React.Component {
 
   initializeSprite() {
     const app = this.props.app;
-    this.walker = new window.PIXI.extras.AnimatedSprite(this.walkingFrames);
-    this.walker.x = this.props.position.x;
-    this.walker.y = this.props.position.y;
-    this.walker.anchor.set(0.5, 1);
-    this.walker.animationSpeed = 0.1;
-    this.walker.scale.x = 3;
-    this.walker.scale.y = 3;
+    this.walkerSprite = new window.PIXI.extras.AnimatedSprite(this.walkingFrames);
+    this.walkerSprite.x = this.props.position.x;
+    this.walkerSprite.y = this.props.position.y;
+    this.walkerSprite.anchor.set(0.5, 1);
+    this.walkerSprite.animationSpeed = 0.1;
+    this.walkerSprite.scale.x = 3;
+    this.walkerSprite.scale.y = 3;
 
     const randomFrame = Math.floor(Math.random() * 6);
-    this.walker.gotoAndPlay(randomFrame);
-    app.stage.addChild(this.walker);
+    this.walkerSprite.gotoAndPlay(randomFrame);
+    app.stage.addChild(this.walkerSprite);
   }
 
   setPosition(x, y) {
-    this.walker.x = x;
-    this.walker.y = y;
+    this.walkerSprite.x = x;
+    this.walkerSprite.y = y;
   }
 
   updateAnimation(isWalking) {
-    if (!isWalking && this.walker.textures === this.walkingFrames) {
-      this.walker.textures = this.idleFrames;
-      this.walker.play();
+    if (!isWalking && this.walkerSprite.textures === this.walkingFrames) {
+      this.walkerSprite.textures = this.idleFrames;
+      this.walkerSprite.play();
     }
   }
 

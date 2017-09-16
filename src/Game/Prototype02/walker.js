@@ -45,7 +45,6 @@ class Walker extends React.Component {
         app={this.props.app}
         position={position}
         isWalking={isWalking}
-        walker={this.walker}
       />
     );
   }

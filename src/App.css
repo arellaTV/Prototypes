@@ -1,48 +1,14 @@
-.App {
-  text-align: center;
-}
-
-.App-header {
+body {
   align-items: center;
-  background-color: #222;
-  color: white;
+  background-color: black;
   display: flex;
-  flex-direction: column;
-  height: 85px;
+  height: 100%;
   justify-content: center;
-  margin-bottom: 10px;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
 }
 
-.App-header__title {
-  font-size: 2.5em;
-  margin-bottom: 0px;
-  margin-top: 0px;
-}
-
-.App-header__subtitle {
-  color: lightgrey;
-  font-size: 0.75em;
-  margin: 0px;
-}
-
-.prototype canvas {
-  width: 70%;
-}
-
-@media only screen and (max-width: 736px) {
-  body {
-    background-color: black;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: center;
-    position: absolute;
-  }
-  .App-header {
-    display: none;
-  }
-
-  .prototype canvas {
-    width: 100%;
-  }
+#root, .prototype, .prototype canvas {
+  width: 100%;
 }
