@@ -1,5 +1,6 @@
 import React from 'react';
 import bind from 'react-autobind';
+import Game from 'Game';
 
 class WalkerSprite extends React.Component {
   constructor(props) {
@@ -11,8 +12,7 @@ class WalkerSprite extends React.Component {
   }
 
   componentDidMount() {
-    const app = this.props.app;
-    app.stage.addChild(this.walkerSprite);
+    Game.stage.addChild(this.walkerSprite);
   }
 
   loadAnimations() {
@@ -27,7 +27,6 @@ class WalkerSprite extends React.Component {
   }
 
   initializeSprite() {
-    const app = this.props.app;
     this.walkerSprite = new window.PIXI.extras.AnimatedSprite(this.walkingFrames);
     this.walkerSprite.x = this.props.position.x;
     this.walkerSprite.y = this.props.position.y;
@@ -38,7 +37,7 @@ class WalkerSprite extends React.Component {
 
     const randomFrame = Math.floor(Math.random() * 6);
     this.walkerSprite.gotoAndPlay(randomFrame);
-    app.stage.addChild(this.walkerSprite);
+    Game.stage.addChild(this.walkerSprite);
   }
 
   setPosition(x, y) {
@@ -54,9 +53,9 @@ class WalkerSprite extends React.Component {
   }
 
   render() {
+    const isWalking = this.props.isWalking;
     const x = this.props.position.x;
     const y = this.props.position.y;
-    const isWalking = this.props.isWalking;
     this.setPosition(x, y);
     this.updateAnimation(isWalking);
     return null;

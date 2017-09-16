@@ -1,18 +1,18 @@
 import React from 'react';
 import bind from 'react-autobind';
+import Game from 'Game';
 
 class Backdrop extends React.Component {
   constructor(props) {
     super(props);
+    bind(this);
     this.backdrop = window.PIXI.Sprite.fromImage('assets/sprites/office_building_total_01.png');
     const backdrop = this.backdrop;
     backdrop.anchor.set(0);
-    bind(this);
   }
 
   componentDidMount() {
-    const app = this.props.app;
-    app.stage.addChild(this.backdrop);
+    Game.stage.addChild(this.backdrop);
   }
 
   setPosition(x, y) {

@@ -1,6 +1,7 @@
 import React from 'react';
 import bind from 'react-autobind';
 import WalkerSprite from './walkerSprite';
+import Game from 'Game';
 
 class Walker extends React.Component {
   constructor(props) {
@@ -21,10 +22,9 @@ class Walker extends React.Component {
   }
 
   moveRight() {
-    const app = this.props.app;
     let position = this.state.position;
     let isWalking = this.state.isWalking;
-    app.ticker.add((delta) => {
+    Game.ticker.add((delta) => {
       if (position.x > 1000) {
         isWalking = false;
       } else {
@@ -38,13 +38,12 @@ class Walker extends React.Component {
   }
 
   render() {
-    const position = this.state.position;
     const isWalking = this.state.isWalking;
+    const position = this.state.position;
     return (
       <WalkerSprite
-        app={this.props.app}
-        position={position}
         isWalking={isWalking}
+        position={position}
       />
     );
   }

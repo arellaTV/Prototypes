@@ -1,18 +1,18 @@
 import React from 'react';
 import bind from 'react-autobind';
+import Game from 'Game';
 
 class FPSCounter extends React.Component {
   constructor(props) {
     super(props);
+    bind(this);
     this.fpsCounter = new window.PIXI.Text(props.fps);
     this.fpsCounter.anchor.set(0);
     this.fpsCounter.style = { fill: props.color };
-    bind(this);
   }
 
   componentDidMount() {
-    const app = this.props.app;
-    app.stage.addChild(this.fpsCounter);
+    Game.stage.addChild(this.fpsCounter);
   }
 
   setPosition(x, y) {
