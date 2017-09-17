@@ -19,7 +19,7 @@ class DoorSprite extends React.Component {
     this.doorSprite.y = this.props.position.y;
     this.doorSprite.alpha = 0.75
     this.doorSprite.anchor.set(0.5, 1);
-    this.doorSprite.animationSpeed = 0.6;
+    this.doorSprite.loop = false;
     this.doorSprite.scale.x = 3;
     this.doorSprite.scale.y = 3;
     Game.stage.addChild(this.doorSprite);
@@ -31,12 +31,17 @@ class DoorSprite extends React.Component {
   }
 
   updateAnimation() {
+    const doorSprite = this.doorSprite;
     const status = this.props.status;
+
     if (status === 'opening') {
-      this.doorSprite.play();
+      doorSprite.animationSpeed = 2;
+      doorSprite.play();
     }
+
     if (status === 'closing') {
-      this.doorSprite.stop();
+      doorSprite.animationSpeed = -2;
+      doorSprite.play();
     }
   }
 

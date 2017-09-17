@@ -9,6 +9,7 @@ class Door extends React.Component {
     this.doorSprite = {};
     this.loadAnimations();
     this.createSprite();
+    this.bindKeyHandlers();
     const position = this.props.position;
     this.state = {
       position,
@@ -16,36 +17,32 @@ class Door extends React.Component {
     };
   }
 
-  loadAnimations() {
-    this.openingFrames = [];
-    this.closingFrames = [];
-    for (let i = 0; i <= 16; i++) {
-      this.openingFrames.push(window.PIXI.Texture.fromFrame(`door_01 ${i}.ase`));
-    }
-    for (let i = 16; i >= 0; i--) {
-      this.closingFrames.push(window.PIXI.Texture.fromFrame(`door_01 ${i}.ase`));
-    }
-    this.fullCycle = this.openingFrames.concat(this.closingFrames);
-  }
-
-  createSprite() {
-    const sprite = new window.PIXI.extras.AnimatedSprite(this.fullCycle);
-    sprite.interactive = true;
-    sprite.buttonMode = true;
+  bindKeyHandlers() {
     window.addEventListener('keydown', (event) => {
-      console.log(event.keyCode);
       if (event.keyCode === 32 && this.state.status !== 'opening') {
         this.updateStatus('opening');
       }
     });
 
     window.addEventListener('keyup', (event) => {
-      console.log('key released', event.keyCode);
       if (event.keyCode === 32 && this.state.status !== 'closing') {
         this.updateStatus('closing');
       }
     })
+  }
+
+  createSprite() {
+    const sprite = new window.PIXI.extras.AnimatedSprite(this.openingFrames);
+    sprite.interactive = true;
+    sprite.buttonMode = true;
     this.sprite = sprite;
+  }
+
+  loadAnimations() {
+    this.openingFrames = [];
+    for (let i = 0; i <= 16; i++) {
+      this.openingFrames.push(window.PIXI.Texture.fromFrame(`door_01 ${i}.ase`));
+    }
   }
 
   updateStatus(status) {
@@ -56,17 +53,11 @@ class Door extends React.Component {
 
   render() {
     const position = this.state.position;
-    const frames = {
-      closingFrames: this.closingFrames,
-      openingFrames: this.openingFrames,
-    }
     return (
       <DoorSprite
-        frames={frames}
         position={position}
         sprite={this.sprite}
         status={this.state.status}
-        updateStatus={this.updateStatus}
       />
     );
   }
