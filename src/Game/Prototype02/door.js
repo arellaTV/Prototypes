@@ -18,6 +18,10 @@ class Door extends React.Component {
   }
 
   bindKeyHandlers() {
+    const sprite = this.sprite;
+    sprite.on('pointerdown', this.updateStatus.bind(this, 'opening'));
+    sprite.on('pointerup', this.updateStatus.bind(this, 'closing'));
+
     window.addEventListener('keydown', (event) => {
       if (event.keyCode === 32 && this.state.status !== 'opening') {
         this.updateStatus('opening');
@@ -28,7 +32,7 @@ class Door extends React.Component {
       if (event.keyCode === 32 && this.state.status !== 'closing') {
         this.updateStatus('closing');
       }
-    })
+    });
   }
 
   createSprite() {
