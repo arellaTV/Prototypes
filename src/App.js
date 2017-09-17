@@ -8,6 +8,7 @@ class App extends Component {
     this.loader = window.PIXI.loader;
     this.loader.add('scott_pilgrim_walking_01', 'assets/sprites/scott_pilgrim_walking_01.json');
     this.loader.add('scott_pilgrim_idle_01', 'assets/sprites/scott_pilgrim_idle_01.json');
+    this.loader.add('scott_pilgrim_opening_01', 'assets/sprites/scott_pilgrim_opening_01.json');
     this.loader.add('door_01', 'assets/sprites/door_01.json');
     this.loader.load();
     this.state = {

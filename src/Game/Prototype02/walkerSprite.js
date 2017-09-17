@@ -6,8 +6,7 @@ class WalkerSprite extends React.Component {
   constructor(props) {
     super(props);
     bind(this);
-    this.walkerSprite = {};
-    this.loadAnimations();
+    this.walkerSprite = this.props.sprite;
     this.initializeSprite();
   }
 
@@ -15,19 +14,7 @@ class WalkerSprite extends React.Component {
     Game.stage.addChild(this.walkerSprite);
   }
 
-  loadAnimations() {
-    this.walkingFrames = [];
-    this.idleFrames = [];
-    for (let i = 0; i < 6; i++) {
-      this.walkingFrames.push(window.PIXI.Texture.fromFrame(`scott_pilgrim_walking_01 ${i}.ase`));
-    }
-    for (let i = 0; i < 8; i++) {
-      this.idleFrames.push(window.PIXI.Texture.fromFrame(`scott_pilgrim_idle ${i}.ase`));
-    }
-  }
-
   initializeSprite() {
-    this.walkerSprite = new window.PIXI.extras.AnimatedSprite(this.walkingFrames);
     this.walkerSprite.x = this.props.position.x;
     this.walkerSprite.y = this.props.position.y;
     this.walkerSprite.anchor.set(0.5, 1);
