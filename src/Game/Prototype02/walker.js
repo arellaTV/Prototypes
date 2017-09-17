@@ -37,13 +37,17 @@ class Walker extends React.Component {
   loadAnimations() {
     const walkingFrames = [];
     const idleFrames = [];
+    const openingFrames = [];
     for (let i = 0; i < 6; i++) {
       walkingFrames.push(window.PIXI.Texture.fromFrame(`scott_pilgrim_walking_01 ${i}.ase`));
     }
     for (let i = 0; i < 8; i++) {
       idleFrames.push(window.PIXI.Texture.fromFrame(`scott_pilgrim_idle ${i}.ase`));
     }
-    this.frames = { walkingFrames, idleFrames }
+    for (let i = 0; i < 5; i++) {
+      openingFrames.push(window.PIXI.Texture.fromFrame(`scott_pilgrim_opening ${i}.ase`));
+    }
+    this.frames = { walkingFrames, idleFrames, openingFrames }
   }
 
   moveRight() {

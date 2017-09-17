@@ -35,7 +35,8 @@ class WalkerSprite extends React.Component {
   updateAnimation(isWalking) {
     const frames = this.props.frames;
     if (!isWalking && this.walkerSprite.textures === frames.walkingFrames) {
-      this.walkerSprite.textures = frames.idleFrames;
+      this.walkerSprite.textures = frames.openingFrames;
+      this.walkerSprite.loop = false;
       this.walkerSprite.play();
     }
   }
