@@ -20,7 +20,9 @@ class Walker extends React.Component {
   }
 
   componentDidMount() {
-    this.moveRight();
+    const isWalking = this.props.isWalking;
+    if (isWalking)
+      this.moveRight();
   }
 
   moveRight() {

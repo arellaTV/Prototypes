@@ -3,6 +3,7 @@ import bind from 'react-autobind';
 import Game from 'Game';
 import Walker from './walker';
 import Backdrop from './backdrop';
+import Door from './door';
 import FPSCounter from './FPScounter';
 import { walkers } from './level.json';
 
@@ -44,13 +45,15 @@ class Prototype02 extends React.Component {
           position={{ x: 0, y: 0 }}
           scale={3}
         />
+        <Door
+          position={{ x: 1008, y: 528 }}
+        />
         {this.state.walkers.map(walker => (
           <Walker
             isWalking={walker.isWalking}
             key={walker.id}
             position={walker.position}
             speed={walker.speed}
-            scale={3}
           />
         ))}
         <FPSCounter
