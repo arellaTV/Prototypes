@@ -49,6 +49,7 @@ class Prototype02 extends React.Component {
             isWalking={walker.isWalking}
             key={walker.id}
             position={walker.position}
+            speed={walker.speed}
             scale={3}
           />
         ))}
