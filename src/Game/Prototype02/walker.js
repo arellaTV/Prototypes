@@ -44,7 +44,7 @@ class Walker extends React.Component {
     for (let i = 0; i < 8; i++) {
       idleFrames.push(window.PIXI.Texture.fromFrame(`scott_pilgrim_idle ${i}.ase`));
     }
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 3; i++) {
       openingFrames.push(window.PIXI.Texture.fromFrame(`scott_pilgrim_opening ${i}.ase`));
     }
     this.frames = { walkingFrames, idleFrames, openingFrames }
