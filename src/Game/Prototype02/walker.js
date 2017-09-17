@@ -28,21 +28,22 @@ class Walker extends React.Component {
   }
 
   createSprite() {
-    const sprite = new window.PIXI.extras.AnimatedSprite(this.walkingFrames);
+    const sprite = new window.PIXI.extras.AnimatedSprite(this.frames.walkingFrames);
     sprite.interactive = true;
     sprite.buttonMode = true;
     this.sprite = sprite;
   }
 
   loadAnimations() {
-    this.walkingFrames = [];
-    this.idleFrames = [];
+    const walkingFrames = [];
+    const idleFrames = [];
     for (let i = 0; i < 6; i++) {
-      this.walkingFrames.push(window.PIXI.Texture.fromFrame(`scott_pilgrim_walking_01 ${i}.ase`));
+      walkingFrames.push(window.PIXI.Texture.fromFrame(`scott_pilgrim_walking_01 ${i}.ase`));
     }
     for (let i = 0; i < 8; i++) {
-      this.idleFrames.push(window.PIXI.Texture.fromFrame(`scott_pilgrim_idle ${i}.ase`));
+      idleFrames.push(window.PIXI.Texture.fromFrame(`scott_pilgrim_idle ${i}.ase`));
     }
+    this.frames = { walkingFrames, idleFrames }
   }
 
   moveRight() {
@@ -64,10 +65,12 @@ class Walker extends React.Component {
   }
 
   render() {
+    const frames = this.frames;
     const isWalking = this.state.isWalking;
     const position = this.state.position;
     return (
       <WalkerSprite
+        frames={frames}
         isWalking={isWalking}
         position={position}
         sprite={this.sprite}
