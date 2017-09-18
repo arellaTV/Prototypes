@@ -4,6 +4,7 @@ import Game from 'Game';
 import Walker from './walker';
 import Backdrop from './backdrop';
 import Door from './door';
+import BuildingCutout from './buildingCutout';
 import FPSCounter from './FPScounter';
 import { walkers } from './level.json';
 
@@ -42,11 +43,11 @@ class Prototype02 extends React.Component {
         ref={thisDiv => this.gameCanvas = thisDiv}
       >
         <Backdrop
-          position={{ x: 0, y: 0 }}
+          position={{ x: 2, y: 0 }}
           scale={3}
         />
         <Door
-          position={{ x: 1008, y: 528 }}
+          position={{ x: 1010, y: 528 }}
         />
         {this.state.walkers.map(walker => (
           <Walker
@@ -56,6 +57,10 @@ class Prototype02 extends React.Component {
             speed={walker.speed}
           />
         ))}
+        <BuildingCutout
+          position={{ x: 2, y: 0 }}
+          scale={3}
+        />
         <FPSCounter
           color={'white'}
           fps={this.state.fps}

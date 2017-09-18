@@ -55,16 +55,19 @@ class Walker extends React.Component {
     let isWalking = this.state.isWalking;
     const speed = this.state.speed;
     const bump = new window.Bump(window.PIXI);
-    const walker = this.sprite;
-    const door = Game.stage.children[1];
+    const door = Game.stage.children[1].hitArea;
 
     Game.ticker.add((delta) => {
-      const isColliding = bump.hit(walker, door);
+      const walker = this.sprite.getBounds();
+      const isColliding = bump.hitTestRectangle(walker, door);
       if (!isColliding) {
         position.x += speed;
+        isWalking = true;
       } else if (isColliding && isWalking !== false) {
-        console.log('collision detected!');
         isWalking = false;
+        position.x = door.x - door.width;
+      } else if (isColliding) {
+        position.x = door.x - door.width;
       }
       this.setState({
         isWalking,

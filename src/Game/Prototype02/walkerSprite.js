@@ -24,7 +24,6 @@ class WalkerSprite extends React.Component {
 
     const randomFrame = Math.floor(Math.random() * 6);
     this.walkerSprite.gotoAndPlay(randomFrame);
-    Game.stage.addChild(this.walkerSprite);
   }
 
   setPosition(x, y) {
@@ -36,6 +35,9 @@ class WalkerSprite extends React.Component {
     const frames = this.props.frames;
     if (!isWalking && this.walkerSprite.textures === frames.walkingFrames) {
       this.walkerSprite.textures = frames.idleFrames;
+      this.walkerSprite.play();
+    } else if (isWalking && this.walkerSprite.textures === frames.idleFrames) {
+      this.walkerSprite.textures = frames.walkingFrames;
       this.walkerSprite.play();
     }
   }
