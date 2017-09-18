@@ -14,6 +14,7 @@ class Prototype02 extends React.Component {
     bind(this);
     const fps = 0;
     this.state = {
+      doorStatus: 'closed',
       fps,
       walkers,
     };
@@ -36,6 +37,12 @@ class Prototype02 extends React.Component {
     })
   }
 
+  updateDoorStatus(doorStatus) {
+    if (this.state.doorStatus !== doorStatus) {
+      this.setState({ doorStatus });
+    }
+  }
+
   render() {
     return (
       <div
@@ -45,9 +52,11 @@ class Prototype02 extends React.Component {
         <Backdrop
           position={{ x: 2, y: 0 }}
           scale={3}
+          updateDoorStatus={this.updateDoorStatus}
         />
         <Door
           position={{ x: 1010, y: 528 }}
+          doorStatus={this.state.doorStatus}
         />
         {this.state.walkers.map(walker => (
           <Walker

@@ -78,6 +78,12 @@ class Walker extends React.Component {
         }
       }
 
+      if (position.x > 1380) {
+        position.x = -100;
+        position.x += speed;
+        isWalking = true;
+      }
+
 
       this.setState({
         isWalking,

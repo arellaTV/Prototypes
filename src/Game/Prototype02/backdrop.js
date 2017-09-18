@@ -9,6 +9,10 @@ class Backdrop extends React.Component {
     this.backdrop = window.PIXI.Sprite.fromImage('assets/sprites/office_building_total_01.png');
     const backdrop = this.backdrop;
     backdrop.anchor.set(0);
+    backdrop.interactive = true;
+    backdrop.buttonMode = true;
+    backdrop.on('pointerdown', this.props.updateDoorStatus.bind(this, 'opening'));
+    backdrop.on('pointerup', this.props.updateDoorStatus.bind(this, 'closing'));
   }
 
   componentDidMount() {

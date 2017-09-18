@@ -57,6 +57,9 @@ class Door extends React.Component {
 
   render() {
     const position = this.state.position;
+    if (this.props.doorStatus) {
+      this.updateStatus(this.props.doorStatus);
+    }
     return (
       <DoorSprite
         position={position}
