@@ -9,30 +9,11 @@ class Door extends React.Component {
     this.doorSprite = {};
     this.loadAnimations();
     this.createSprite();
-    this.bindKeyHandlers();
     const position = this.props.position;
     this.state = {
       position,
       status: 'closed',
     };
-  }
-
-  bindKeyHandlers() {
-    const sprite = this.sprite;
-    sprite.on('pointerdown', this.updateStatus.bind(this, 'opening'));
-    sprite.on('pointerup', this.updateStatus.bind(this, 'closing'));
-
-    window.addEventListener('keydown', (event) => {
-      if (event.keyCode === 32 && this.state.status !== 'opening') {
-        this.updateStatus('opening');
-      }
-    });
-
-    window.addEventListener('keyup', (event) => {
-      if (event.keyCode === 32 && this.state.status !== 'closing') {
-        this.updateStatus('closing');
-      }
-    });
   }
 
   createSprite() {
@@ -57,14 +38,12 @@ class Door extends React.Component {
 
   render() {
     const position = this.state.position;
-    if (this.props.doorStatus) {
-      this.updateStatus(this.props.doorStatus);
-    }
+    const status = this.props.doorStatus;
     return (
       <DoorSprite
         position={position}
         sprite={this.sprite}
-        status={this.state.status}
+        status={status}
       />
     );
   }

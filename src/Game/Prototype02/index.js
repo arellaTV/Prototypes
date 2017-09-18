@@ -6,16 +6,19 @@ import Backdrop from './backdrop';
 import Door from './door';
 import BuildingCutout from './buildingCutout';
 import FPSCounter from './FPScounter';
+import Information from './information';
 import { walkers } from './level.json';
 
 class Prototype02 extends React.Component {
   constructor() {
     super();
     bind(this);
+    this.bindKeyHandlers();
     const fps = 0;
     this.state = {
       doorStatus: 'closed',
       fps,
+      information: {},
       walkers,
     };
   }
@@ -24,10 +27,32 @@ class Prototype02 extends React.Component {
     this.gameCanvas.appendChild(Game.view);
     Game.start();
     this.renderFPSCounter();
+    this.getLastGitCommit();
   }
 
   componentWillUnMount() {
     Game.stop();
+  }
+
+  bindKeyHandlers() {
+    window.addEventListener('keydown', (event) => {
+      if (event.keyCode === 32 && this.state.status !== 'opening') {
+        this.updateDoorStatus('opening');
+      }
+    });
+
+    window.addEventListener('keyup', (event) => {
+      if (event.keyCode === 32 && this.state.status !== 'closing') {
+        this.updateDoorStatus('closing');
+      }
+    });
+  }
+
+  getLastGitCommit() {
+    fetch('/api/last-git-commit')
+      .then(response => response.json())
+      .then(latestGitCommit => this.setState({ information: latestGitCommit }))
+      .catch(err => console.warn(err));
   }
 
   renderFPSCounter() {
@@ -74,6 +99,12 @@ class Prototype02 extends React.Component {
           color={'white'}
           fps={this.state.fps}
           position={{ x: 10, y: 10 }}
+          scale={1}
+        />
+        <Information
+          color={'white'}
+          information={this.state.information}
+          position={{ x: 10, y: 600 }}
           scale={1}
         />
       </div>

@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "express": "^4.15.4",
+    "git-last-commit": "^0.3.0",
     "pixi.js": "^4.5.5",
     "react": "^15.6.1",
     "react-autobind": "^1.0.6",
@@ -10,7 +12,9 @@
     "react-scripts": "1.0.13"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts build && node server/index.js",
+    "start-dev": "react-scripts start",
+    "server": "node server/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
