@@ -21,7 +21,7 @@ class DoorSprite extends React.Component {
     const doorBounds = this.doorSprite.getBounds();
     const xPosition = doorBounds.x + doorBounds.width * 0.75;
     const yPosition = doorBounds.y;
-    const width = 10;
+    const width = 20;
     const height = doorBounds.height;
 
     // Make a rectangle for collision

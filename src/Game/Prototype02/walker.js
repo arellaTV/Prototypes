@@ -66,13 +66,13 @@ class Walker extends React.Component {
       } else if (isColliding && isWalking !== false) {
         isWalking = false;
         if (position.x < door.x + door.width) {
-          position.x = door.x - door.width - 40;
+          position.x = door.x - door.width - 20;
         } else if (position.x >= door.x + door.width) {
           position.x = door.x + door.width + 110;
         }
       } else if (isColliding) {
         if (position.x < door.x + door.width) {
-          position.x = door.x - door.width - 40;
+          position.x = door.x - door.width - 20;
         } else if (position.x >= door.x + door.width) {
           position.x = door.x + door.width + 110;
         }
