@@ -6,7 +6,7 @@ class Information extends React.Component {
   constructor(props) {
     super(props);
     bind(this);
-    this.information = new window.PIXI.Text(`props.information`);
+    this.information = new window.PIXI.Text('');
     this.information.anchor.set(0);
     this.information.style = { fill: props.color };
   }
