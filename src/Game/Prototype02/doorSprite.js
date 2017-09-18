@@ -81,7 +81,7 @@ class DoorSprite extends React.Component {
     }
 
     if (status === 'closing') {
-      doorSprite.animationSpeed = -2;
+      doorSprite.animationSpeed = -1;
       doorSprite.play()
     }
   }
