@@ -51,7 +51,10 @@ class Prototype02 extends React.Component {
   getLastGitCommit() {
     fetch('/api/last-git-commit')
       .then(response => response.json())
-      .then(latestGitCommit => this.setState({ information: latestGitCommit }))
+      .then(latestGitCommit => {
+        console.log(latestGitCommit);
+        this.setState({ information: latestGitCommit });
+      })
       .catch(err => console.warn(err));
   }
 
