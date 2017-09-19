@@ -4,7 +4,7 @@ const port = process.env.PORT || 3000;
 const git = require('git-last-commit');
 
 
-app.use('/', express.static(`${__dirname}/../build`));
+app.use('/', express.static(`${__dirname}/../client/build`));
 
 app.get('/api/last-git-commit', (req, res) => {
   git.getLastCommit(function(err, commit) {
