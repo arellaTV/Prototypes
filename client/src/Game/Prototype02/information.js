@@ -13,8 +13,8 @@ class Information extends React.Component {
     this.information.buttonMode = true;
     this.information.on('pointerdown', () => {
       if (this.props.information) {
-        const hash = this.props.information.hash;
-        window.open(`https://github.com/hold-the-door-game/Prototypes/commit/${this.props.information.hash}`)
+        const html_url = this.props.information.html_url;
+        window.open(html_url);
       }
     });
   }
@@ -35,7 +35,9 @@ class Information extends React.Component {
 
   updateInformation(information) {
     if (Object.keys(information).length !== 0 && information.constructor === Object) {
-      this.information.text = `Latest commit: ${information.hash}`;
+      const date = new Date(information.committer.date);
+      const dateString = date.toLocaleString();
+      this.information.text = `Latest commit: ${information.sha}\n${information.committer.name}\n${dateString}`;
     }
   }
 

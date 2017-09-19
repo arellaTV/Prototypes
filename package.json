@@ -7,14 +7,16 @@
   },
   "scripts": {
     "start": "node server",
-    "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "npm run latest-commit && cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "latest-commit": "node server/latestCommit.js"
   },
   "cacheDirectories": [
     "node_modules",
     "client/node_modules"
   ],
   "dependencies": {
-    "express": "^4.15.4"
+    "express": "^4.15.4",
+    "request": "^2.81.0"
   },
   "repository": {
     "type": "git",
