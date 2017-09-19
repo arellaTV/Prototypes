@@ -9,6 +9,14 @@ class Information extends React.Component {
     this.information = new window.PIXI.Text('');
     this.information.anchor.set(0);
     this.information.style = { fill: props.color };
+    this.information.interactive = true;
+    this.information.buttonMode = true;
+    this.information.on('pointerdown', () => {
+      if (this.props.information) {
+        const hash = this.props.information.hash;
+        window.open(`https://github.com/hold-the-door-game/Prototypes/commit/${this.props.information.hash}`)
+      }
+    });
   }
 
   componentDidMount() {
@@ -27,7 +35,7 @@ class Information extends React.Component {
 
   updateInformation(information) {
     if (Object.keys(information).length !== 0 && information.constructor === Object) {
-      this.information.text = `Latest commit: ${information.shortHash}\n${information.subject}\n${information.committer.name}`;
+      this.information.text = `Latest commit: ${information.hash}`;
     }
   }
 

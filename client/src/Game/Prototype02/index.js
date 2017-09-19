@@ -51,10 +51,7 @@ class Prototype02 extends React.Component {
   getLastGitCommit() {
     fetch('/api/last-git-commit')
       .then(response => response.json())
-      .then(latestGitCommit => {
-        console.log(latestGitCommit);
-        this.setState({ information: latestGitCommit });
-      })
+      .then(latestGitCommit => this.setState({ information: latestGitCommit }))
       .catch(err => console.warn(err));
   }
 
@@ -107,7 +104,7 @@ class Prototype02 extends React.Component {
         <Information
           color={'white'}
           information={this.state.information}
-          position={{ x: 10, y: 600 }}
+          position={{ x: 10, y: 675 }}
           scale={1}
         />
       </div>
