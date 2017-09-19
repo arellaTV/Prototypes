@@ -1,6 +1,6 @@
 import React from 'react';
 import bind from 'react-autobind';
-import Game from 'Game';
+import Game from './../index.js'
 import Walker from './walker';
 import Backdrop from './backdrop';
 import Door from './door';
