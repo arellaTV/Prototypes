@@ -35,18 +35,19 @@ class DoorSprite extends React.Component {
     this.box.drawRect(0, 0, width, height);
     this.box.position.x = xPosition;
     this.box.position.y = yPosition;
-    this.box.alpha = 0;
+    this.box.alpha = 0.0;
 
     // Bind the size of the collisionBox and rectangle to door sprite animation
     this.doorSprite.onFrameChange = (frame) => {
       this.box.position.x = xPosition - (frame * 9);
       this.doorSprite.hitArea.x = xPosition  - (frame * 9);
+      this.props.updateCurrentDoorFrame(frame)
 
       // if the door is mostly open, remove the collision box
       if (frame === 16) {
-        this.box.width = 0;
-        this.doorSprite.hitArea.width = 0;
-        this.doorSprite.hitArea.height = 0;
+        // this.box.width = 0;
+        // this.doorSprite.hitArea.width = 0;
+        // this.doorSprite.hitArea.height = 0;
       // if the door is mostly closed, re-add the collision box
       } else {
         this.box.width = width;

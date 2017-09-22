@@ -16,6 +16,8 @@ class Prototype02 extends React.Component {
     this.bindKeyHandlers();
     const fps = 0;
     this.state = {
+      canOpen: false,
+      currentDoorFrame: 0,
       doorStatus: 'closed',
       fps,
       information: {},
@@ -36,8 +38,12 @@ class Prototype02 extends React.Component {
 
   bindKeyHandlers() {
     window.addEventListener('keydown', (event) => {
-      if (event.keyCode === 32 && this.state.status !== 'opening') {
+      if (event.keyCode === 32 && this.state.status !== 'opening' && this.state.canOpen === true) {
         this.updateDoorStatus('opening');
+        setTimeout(() => {
+          this.updateCanOpenStatus(false);
+          this.updateDoorStatus('closing');
+        }, 2000);
       }
     });
 
@@ -62,10 +68,23 @@ class Prototype02 extends React.Component {
     })
   }
 
-  updateDoorStatus(doorStatus) {
-    if (this.state.doorStatus !== doorStatus) {
-      this.setState({ doorStatus });
+  updateCanOpenStatus(canOpen) {
+    if (this.state.canOpen !== canOpen) {
+      this.setState({ canOpen });
     }
+  }
+
+  updateCurrentDoorFrame(currentDoorFrame) {
+    if (this.state.currentDoorFrame !== currentDoorFrame) {
+      console.log('currentDoorFrame:', currentDoorFrame);
+      this.setState({ currentDoorFrame });
+    }
+  }
+
+  updateDoorStatus(doorStatus) {
+    // if (this.state.doorStatus !== doorStatus) {
+      this.setState({ doorStatus });
+    // }
   }
 
   render() {
@@ -82,6 +101,7 @@ class Prototype02 extends React.Component {
         <Door
           position={{ x: 1010, y: 528 }}
           doorStatus={this.state.doorStatus}
+          updateCurrentDoorFrame={this.updateCurrentDoorFrame}
         />
         {this.state.walkers.map(walker => (
           <Walker
@@ -89,6 +109,8 @@ class Prototype02 extends React.Component {
             key={walker.id}
             position={walker.position}
             speed={walker.speed}
+            updateCanOpenStatus={this.updateCanOpenStatus}
+            currentDoorFrame={this.state.currentDoorFrame}
           />
         ))}
         <BuildingCutout

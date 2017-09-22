@@ -35,9 +35,7 @@ class Information extends React.Component {
 
   updateInformation(information) {
     if (Object.keys(information).length !== 0 && information.constructor === Object) {
-      const date = new Date(information.committer.date);
-      const dateString = date.toLocaleString();
-      this.information.text = `Latest commit: ${information.sha.substring(0, 6)}\n${information.message}\n${information.committer.name}\n${dateString}`;
+      this.information.text = `Latest commit: ${information.sha.substring(0, 6)}\n${information.message}\n${information.committer.name}\n`;
     }
   }
 

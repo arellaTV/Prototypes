@@ -31,23 +31,41 @@ class WalkerSprite extends React.Component {
     this.walkerSprite.y = y;
   }
 
-  updateAnimation(isWalking) {
+  updateAnimation(isOpening, isWalking) {
+    const currentDoorFrame = this.props.currentDoorFrame;
     const frames = this.props.frames;
+    if (isOpening) {
+      if (currentDoorFrame > 0 && currentDoorFrame < 7) {
+        // frame 3
+        this.walkerSprite.textures = [frames.tighteningFrames[0]];
+        this.walkerSprite.position.y = this.props.position.y - 10;
+      } else if (currentDoorFrame > 6 && currentDoorFrame < 12) {
+        // frame 4
+        this.walkerSprite.textures = [frames.tighteningFrames[1]];
+        this.walkerSprite.position.y = this.props.position.y - 20;
+      } else if (currentDoorFrame > 14 && currentDoorFrame < 17) {
+        // frame 5
+        this.walkerSprite.textures = [frames.tighteningFrames[2]];
+        this.walkerSprite.position.y = this.props.position.y - 30;
+      }
+    }
     if (!isWalking && this.walkerSprite.textures === frames.walkingFrames) {
       this.walkerSprite.textures = frames.idleFrames;
-      this.walkerSprite.play();
+      this.walkerSprite.loop = true;
     } else if (isWalking && this.walkerSprite.textures === frames.idleFrames) {
       this.walkerSprite.textures = frames.walkingFrames;
-      this.walkerSprite.play();
+      this.walkerSprite.loop = true;
     }
+    this.walkerSprite.play();
   }
 
   render() {
+    const isOpening = this.props.isOpening;
     const isWalking = this.props.isWalking;
     const x = this.props.position.x;
     const y = this.props.position.y;
     this.setPosition(x, y);
-    this.updateAnimation(isWalking);
+    this.updateAnimation(isOpening, isWalking);
     return null;
   }
 }
