@@ -2,6 +2,7 @@
   "name": "prototypes",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001/",
   "dependencies": {
     "express": "^4.15.4",
     "git-last-commit": "^0.3.0",
