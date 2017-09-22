@@ -104,7 +104,7 @@ class Prototype02 extends React.Component {
         <Information
           color={'white'}
           information={this.state.information}
-          position={{ x: 10, y: 600 }}
+          position={{ x: 10, y: 586 }}
           scale={1}
         />
       </div>
