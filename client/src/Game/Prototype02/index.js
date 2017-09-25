@@ -1,12 +1,12 @@
 import React from 'react';
 import bind from 'react-autobind';
-import Game from './../index.js'
-import Walker from './walker';
-import Backdrop from './backdrop';
-import Door from './door';
-import BuildingCutout from './buildingCutout';
-import FPSCounter from './FPScounter';
-import Information from './information';
+import Game from 'Game/index.js'
+import Walker from './Walker';
+import Backdrop from './Backdrop';
+import Door from './Door';
+import BuildingCutout from './Backdrop/buildingCutout';
+import Information from './Information';
+import FPSCounter from './Information/FPScounter';
 import { walkers } from './level.json';
 
 class Prototype02 extends React.Component {

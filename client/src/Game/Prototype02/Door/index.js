@@ -1,6 +1,6 @@
 import React from 'react';
 import bind from 'react-autobind';
-import DoorSprite from './doorSprite';
+import DoorSprite from './sprite';
 
 class Door extends React.Component {
   constructor(props) {

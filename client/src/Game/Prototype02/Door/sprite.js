@@ -1,6 +1,6 @@
 import React from 'react';
 import bind from 'react-autobind';
-import Game from './../index.js'
+import Game from 'Game/index.js'
 
 class DoorSprite extends React.Component {
   constructor(props) {

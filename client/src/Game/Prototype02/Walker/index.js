@@ -1,7 +1,7 @@
 import React from 'react';
 import bind from 'react-autobind';
-import WalkerSprite from './walkerSprite';
-import Game from './../index.js'
+import WalkerSprite from './sprite';
+import Game from 'Game/index.js'
 
 class Walker extends React.Component {
   constructor(props) {
