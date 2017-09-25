@@ -2,9 +2,9 @@ import React from 'react';
 import bind from 'react-autobind';
 import Game from 'Game/index.js'
 import Walker from './Walker';
-import Backdrop from './Backdrop';
+import Background from './Setting/background';
+import Foreground from './Setting/foreground';
 import Door from './Door';
-import BuildingCutout from './Backdrop/buildingCutout';
 import Information from './Information';
 import FPSCounter from './Information/FPScounter';
 import { walkers } from './level.json';
@@ -19,6 +19,7 @@ class Prototype02 extends React.Component {
       canOpen: false,
       currentDoorFrame: 0,
       doorStatus: 'closed',
+      currentDoorInputEvent: null,
       fps,
       information: {},
       walkers,
@@ -39,13 +40,15 @@ class Prototype02 extends React.Component {
   bindKeyHandlers() {
     window.addEventListener('keydown', (event) => {
       if (event.keyCode === 32 && this.state.status !== 'opening' && this.state.canOpen === true) {
-        this.updateDoorStatus('opening');
+        // this.updateDoorStatus('opening');
+        this.updateCurrentDoorInputEvent('door--keydown');
       }
     });
 
     window.addEventListener('keyup', (event) => {
       if (event.keyCode === 32 && this.state.status !== 'closing') {
-        this.updateDoorStatus('closing');
+        // this.updateDoorStatus('closing');
+        this.updateCurrentDoorInputEvent('door--keyup');
       }
     });
   }
@@ -72,8 +75,13 @@ class Prototype02 extends React.Component {
 
   updateCurrentDoorFrame(currentDoorFrame) {
     if (this.state.currentDoorFrame !== currentDoorFrame) {
-      console.log('currentDoorFrame:', currentDoorFrame);
       this.setState({ currentDoorFrame });
+    }
+  }
+
+  updateCurrentDoorInputEvent(currentDoorInputEvent) {
+    if (this.state.currentDoorInputEvent !== currentDoorInputEvent) {
+      this.setState({ currentDoorInputEvent })
     }
   }
 
@@ -89,14 +97,15 @@ class Prototype02 extends React.Component {
         className="prototype"
         ref={thisDiv => this.gameCanvas = thisDiv}
       >
-        <Backdrop
+        <Background
           position={{ x: 2, y: 0 }}
           scale={3}
           updateDoorStatus={this.updateDoorStatus}
         />
         <Door
-          position={{ x: 1010, y: 528 }}
           doorStatus={this.state.doorStatus}
+          id={0}
+          position={{ x: 1010, y: 528 }}
           updateCurrentDoorFrame={this.updateCurrentDoorFrame}
         />
         {this.state.walkers.map(walker => (
@@ -107,9 +116,10 @@ class Prototype02 extends React.Component {
             speed={walker.speed}
             updateCanOpenStatus={this.updateCanOpenStatus}
             currentDoorFrame={this.state.currentDoorFrame}
+            currentDoorInputEvent={this.state.currentDoorInputEvent}
           />
         ))}
-        <BuildingCutout
+        <Foreground
           position={{ x: 2, y: 0 }}
           scale={3}
         />

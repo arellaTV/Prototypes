@@ -45,9 +45,9 @@ class DoorSprite extends React.Component {
 
       // if the door is mostly open, remove the collision box
       if (frame === 16) {
-        // this.box.width = 0;
-        // this.doorSprite.hitArea.width = 0;
-        // this.doorSprite.hitArea.height = 0;
+        this.box.width = 0;
+        this.doorSprite.hitArea.width = 0;
+        this.doorSprite.hitArea.height = 0;
       // if the door is mostly closed, re-add the collision box
       } else {
         this.box.width = width;
@@ -65,6 +65,8 @@ class DoorSprite extends React.Component {
     this.doorSprite.loop = false;
     this.doorSprite.scale.x = 3;
     this.doorSprite.scale.y = 3;
+    this.doorSprite.class = 'door';
+    this.doorSprite.id = this.props.id;
   }
 
   setPosition(x, y) {

@@ -2,7 +2,7 @@ import React from 'react';
 import bind from 'react-autobind';
 import Game from 'Game/index.js'
 
-class Backdrop extends React.Component {
+class Background extends React.Component {
   constructor(props) {
     super(props);
     bind(this);
@@ -11,6 +11,7 @@ class Backdrop extends React.Component {
     backdrop.anchor.set(0);
     backdrop.interactive = true;
     backdrop.buttonMode = true;
+    backdrop.class = 'background';
     backdrop.on('pointerdown', this.props.updateDoorStatus.bind(this, 'opening'));
     backdrop.on('pointerup', this.props.updateDoorStatus.bind(this, 'closing'));
   }
@@ -39,4 +40,4 @@ class Backdrop extends React.Component {
   }
 }
 
-export default Backdrop;
+export default Background;

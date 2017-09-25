@@ -9,13 +9,19 @@ class Walker extends React.Component {
     bind(this);
     this.loadAnimations();
     this.createSprite();
+    const canOpen = false;
+    const collisionDoor = null;
     const id = this.props.id;
+    const isColliding = false;
     const isOpening = false;
     const isWalking = this.props.isWalking;
     const position = this.props.position;
     const speed = this.props.speed;
     this.state = {
+      canOpen,
+      collisionDoor,
       id,
+      isColliding,
       isOpening,
       isWalking,
       position,
@@ -25,8 +31,35 @@ class Walker extends React.Component {
 
   componentDidMount() {
     const isWalking = this.props.isWalking;
-    if (isWalking)
-      this.moveRight();
+    if (isWalking) this.moveRight();
+    this.checkForCollisions();
+    this.handleCollisions();
+  }
+
+  checkForCollisions() {
+    const bump = new window.Bump(window.PIXI);
+
+    Game.ticker.add((delta) => {
+      const doors = Game.stage.children.filter(sprite => sprite.class === 'door' ? sprite : null);
+      const walker = this.sprite.getBounds();
+      let collisionDoor = this.state.collisionDoor;
+      let isColliding = false;
+      let isWalking = this.state.isWalking;
+      doors.map(door => {
+        if (bump.hitTestRectangle(walker, door.hitArea)) {
+          collisionDoor = door;
+          isColliding = true;
+          isWalking = false;
+        }
+      });
+
+      this.setState({
+        collisionDoor,
+        isColliding,
+        isWalking,
+      });
+    });
+
   }
 
   createSprite() {
@@ -34,6 +67,33 @@ class Walker extends React.Component {
     sprite.interactive = true;
     sprite.buttonMode = true;
     this.sprite = sprite;
+  }
+
+  handleCollisions() {
+    Game.ticker.add((delta) => {
+      let canOpen = this.state.canOpen;
+      let collisionDoor = this.state.collisionDoor;
+      let isColliding = this.state.isColliding;
+      let isWalking = this.state.isWalking;
+      let position = this.state.position;
+      if (isColliding) {
+        canOpen = true;
+        if (isWalking === true) {
+          isWalking = false;
+        }
+        if (position.x <= collisionDoor.hitArea.x) {
+          position.x = collisionDoor.hitArea.x - collisionDoor.hitArea.width - 10;
+        } else {
+          position.x = collisionDoor.hitArea.x + collisionDoor.hitArea.width + 100;
+        }
+      }
+
+      this.setState({
+        canOpen,
+        isWalking,
+        position,
+      });
+    });
   }
 
   loadAnimations() {
@@ -57,43 +117,30 @@ class Walker extends React.Component {
   }
 
   moveRight() {
-    let position = this.state.position;
-    let isOpening = this.state.isOpening;
-    let isWalking = this.state.isWalking;
     const speed = this.state.speed;
-    const bump = new window.Bump(window.PIXI);
-    const door = Game.stage.children[1].hitArea;
-
     Game.ticker.add((delta) => {
-      const walker = this.sprite.getBounds();
-      const isColliding = bump.hitTestRectangle(walker, door);
+      let position = this.state.position;
+      let canOpen = this.state.canOpen;
+      let collisionDoor = this.state.collisionDoor;
+      let isColliding = this.state.isColliding;
+      let isWalking = false;
+
       if (!isColliding) {
-        this.props.updateCanOpenStatus(false);
         position.x += speed;
-        isOpening= false;
+        canOpen = false;
+        collisionDoor = null;
         isWalking = true;
-      } else if (isColliding) {
-        this.props.updateCanOpenStatus(true);
-        if (position.x < door.x + door.width) {
-          position.x = door.x - door.width - 10;
-        } else if (position.x >= door.x + door.width) {
-          position.x = door.x + door.width + 110;
-        }
-        isOpening = true;
-        if (isWalking === true) {
-          isWalking = false;
-        }
       }
 
       if (position.x > 1380) {
         position.x = -100;
         position.x += speed;
-        isOpening = false;
         isWalking = true;
       }
 
       this.setState({
-        isOpening,
+        canOpen,
+        collisionDoor,
         isWalking,
         position,
       })
