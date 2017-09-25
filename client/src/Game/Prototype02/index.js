@@ -40,10 +40,6 @@ class Prototype02 extends React.Component {
     window.addEventListener('keydown', (event) => {
       if (event.keyCode === 32 && this.state.status !== 'opening' && this.state.canOpen === true) {
         this.updateDoorStatus('opening');
-        setTimeout(() => {
-          this.updateCanOpenStatus(false);
-          this.updateDoorStatus('closing');
-        }, 2000);
       }
     });
 
