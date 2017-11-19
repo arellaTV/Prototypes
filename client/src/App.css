@@ -8,6 +8,10 @@ body {
   width: 100%;
 }
 
-#root, .prototype, .prototype canvas {
+#root {
+  width: 50%;
+}
+
+.prototype, .prototype canvas {
   width: 100%;
 }
