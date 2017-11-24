@@ -9,7 +9,7 @@ import Information from './Information';
 import FPSCounter from './Information/FPScounter';
 import { walkers } from './level.json';
 
-class Prototype02 extends React.Component {
+class Prototype03 extends React.Component {
   constructor() {
     super();
     bind(this);
@@ -28,18 +28,10 @@ class Prototype02 extends React.Component {
     this.gameCanvas.appendChild(Game.view);
     Game.start();
     this.renderFPSCounter();
-    this.getLastGitCommit();
   }
 
   componentWillUnMount() {
     Game.stop();
-  }
-
-  getLastGitCommit() {
-    fetch('/api/last-git-commit')
-      .then(response => response.json())
-      .then(latestGitCommit => this.setState({ information: latestGitCommit }))
-      .catch(err => console.warn(err));
   }
 
   renderFPSCounter() {
@@ -83,15 +75,9 @@ class Prototype02 extends React.Component {
           position={{ x: 10, y: 10 }}
           scale={1}
         />
-        <Information
-          color={'white'}
-          information={this.state.information}
-          position={{ x: 10, y: 586 }}
-          scale={1}
-        />
       </div>
     );
   }
 }
 
-export default Prototype02;
+export default Prototype03;
