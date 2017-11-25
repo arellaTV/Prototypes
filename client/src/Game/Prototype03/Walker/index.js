@@ -9,57 +9,21 @@ class Walker extends React.Component {
     bind(this);
     this.loadAnimations();
     this.createSprite();
-    const canOpen = false;
-    const collisionDoor = null;
-    const id = this.props.id;
-    const isColliding = false;
-    const isOpening = false;
-    const isWalking = this.props.isWalking;
-    const position = this.props.position;
-    const speed = this.props.speed;
     this.state = {
-      canOpen,
-      collisionDoor,
-      id,
-      isColliding,
-      isOpening,
-      isWalking,
-      position,
-      speed,
+      canOpen: false,
+      collisionDoor: null,
+      id: this.props.id,
+      isColliding: false,
+      isOpening: false,
+      isWalking: this.props.isWalking,
+      position: this.props.position,
+      speed: this.props.speed,
     };
   }
 
   componentDidMount() {
     const isWalking = this.props.isWalking;
     if (isWalking) this.moveRight();
-    this.checkForCollisions();
-    this.handleCollisions();
-  }
-
-  checkForCollisions() {
-    const bump = new window.Bump(window.PIXI);
-
-    Game.ticker.add((delta) => {
-      const doors = Game.stage.children.filter(sprite => sprite.class === 'door' ? sprite : null);
-      const walker = this.sprite.getBounds();
-      let collisionDoor = this.state.collisionDoor;
-      let isColliding = false;
-      let isWalking = this.state.isWalking;
-      doors.forEach((door) => {
-        if (bump.hitTestRectangle(walker, door.hitArea)) {
-          collisionDoor = door;
-          isColliding = true;
-          isWalking = false;
-        }
-      });
-
-      this.setState({
-        collisionDoor,
-        isColliding,
-        isWalking,
-      });
-    });
-
   }
 
   createSprite() {
@@ -67,33 +31,6 @@ class Walker extends React.Component {
     sprite.interactive = true;
     sprite.buttonMode = true;
     this.sprite = sprite;
-  }
-
-  handleCollisions() {
-    Game.ticker.add((delta) => {
-      let canOpen = this.state.canOpen;
-      let collisionDoor = this.state.collisionDoor;
-      let isColliding = this.state.isColliding;
-      let isWalking = this.state.isWalking;
-      let position = this.state.position;
-      if (isColliding) {
-        canOpen = true;
-        if (isWalking === true) {
-          isWalking = false;
-        }
-        if (position.x <= collisionDoor.hitArea.x) {
-          position.x = collisionDoor.hitArea.x - collisionDoor.hitArea.width - 10;
-        } else {
-          position.x = collisionDoor.hitArea.x + collisionDoor.hitArea.width + 100;
-        }
-      }
-
-      this.setState({
-        canOpen,
-        isWalking,
-        position,
-      });
-    });
   }
 
   loadAnimations() {

@@ -1,6 +1,7 @@
 import React from 'react';
 import bind from 'react-autobind';
 import DoorSprite from './sprite';
+import Game from 'Game/index.js'
 
 class Door extends React.Component {
   constructor(props) {
@@ -9,11 +10,29 @@ class Door extends React.Component {
     this.doorSprite = {};
     this.loadAnimations();
     this.createSprite();
-    const position = this.props.position;
     this.state = {
-      position,
+      position: this.props.position,
       status: 'closed',
     };
+  }
+
+  checkForCollisions() {
+    // const bump = new window.Bump(window.PIXI);
+
+    Game.ticker.add((delta) => {
+      const walkers = this.props.walkers;
+      // const door = this.sprite.getBounds();
+      walkers.forEach((walker) => {
+        console.log(walker);
+        // if (bump.hitTestRectangle(walker.sprite, door.hitArea)) {
+          // do something
+        // }
+      });
+    });
+  }
+
+  componentDidMount() {
+    this.checkForCollisions();
   }
 
   createSprite() {

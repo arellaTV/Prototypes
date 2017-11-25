@@ -5,7 +5,6 @@ import Walker from './Walker';
 import Background from './Setting/background';
 import Foreground from './Setting/foreground';
 import Door from './Door';
-import Information from './Information';
 import FPSCounter from './Information/FPScounter';
 import { walkers } from './level.json';
 
@@ -14,12 +13,8 @@ class Prototype03 extends React.Component {
     super();
     bind(this);
     this.state = {
-      canOpen: false,
-      currentDoorFrame: 0,
       doorStatus: 'closed',
-      currentDoorInputEvent: null,
       fps: 0,
-      information: {},
       walkers,
     };
   }
@@ -32,6 +27,17 @@ class Prototype03 extends React.Component {
 
   componentWillUnMount() {
     Game.stop();
+  }
+
+  reactWalkers() {
+    return this.state.walkers.map(walker => (
+      <Walker
+        isWalking={walker.isWalking}
+        key={walker.id}
+        position={walker.position}
+        speed={walker.speed}
+      />
+    ))
   }
 
   renderFPSCounter() {
@@ -56,15 +62,9 @@ class Prototype03 extends React.Component {
           id={0}
           position={{ x: 1010, y: 528 }}
           scale={3}
+          walkers={this.reactWalkers()}
         />
-        {this.state.walkers.map(walker => (
-          <Walker
-            isWalking={walker.isWalking}
-            key={walker.id}
-            position={walker.position}
-            speed={walker.speed}
-          />
-        ))}
+        {this.reactWalkers()}
         <Foreground
           position={{ x: 2, y: 0 }}
           scale={3}
