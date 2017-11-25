@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Prototype03 from './Game/Prototype03';
+import Prototype01 from './Game/Prototype01';
 import './App.css';
 
 class App extends Component {
@@ -29,7 +29,7 @@ class App extends Component {
       return null;
     }
     return (
-      <Prototype03 />
+      <Prototype01 />
     );
   }
 }

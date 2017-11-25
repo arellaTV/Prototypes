@@ -75,6 +75,7 @@ class Prototype01 extends React.Component {
         ref={thisDiv => this.gameCanvas = thisDiv}
       >
         <Backdrop
+          app={this.app}
           position={{ x: 0, y: 0 }}
           scale={3}
         />
