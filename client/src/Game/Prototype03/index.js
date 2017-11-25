@@ -22,12 +22,17 @@ class Prototype03 extends React.Component {
 
   componentDidMount() {
     this.gameCanvas.appendChild(Game.view);
+    document.addEventListener('keyup', this.handleInput);
     Game.start();
     this.renderFPSCounter();
   }
 
   componentWillUnMount() {
     this.stopGame();
+  }
+
+  handleInput(e) {
+    if (e.keyCode === 13) this.toggleGame();
   }
 
   startGame() {
@@ -70,7 +75,6 @@ class Prototype03 extends React.Component {
     return (
       <div
         className="prototype"
-        onClick={this.toggleGame}
         ref={thisDiv => this.gameCanvas = thisDiv}
       >
         <Background
