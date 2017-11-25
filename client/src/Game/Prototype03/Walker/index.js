@@ -10,11 +10,7 @@ class Walker extends React.Component {
     this.loadAnimations();
     this.createSprite();
     this.state = {
-      canOpen: false,
-      collisionDoor: null,
       id: this.props.id,
-      isColliding: false,
-      isOpening: false,
       isWalking: this.props.isWalking,
       position: this.props.position,
       speed: this.props.speed,
@@ -22,8 +18,8 @@ class Walker extends React.Component {
   }
 
   componentDidMount() {
-    const isWalking = this.props.isWalking;
-    if (isWalking) this.moveRight();
+    this.sprite.isWalking = this.props.isWalking;
+    if (this.sprite.isWalking) this.moveRight();
   }
 
   createSprite() {
@@ -55,29 +51,26 @@ class Walker extends React.Component {
 
   moveRight() {
     const speed = this.state.speed;
-    Game.ticker.add((delta) => {
-      let position = this.state.position;
-      let canOpen = this.state.canOpen;
-      let collisionDoor = this.state.collisionDoor;
-      let isColliding = this.state.isColliding;
-      let isWalking = false;
 
-      if (!isColliding) {
+    // Add movement to Game loop
+    Game.ticker.add(() => {
+      // Get the sprite's current position
+      let position = this.state.position;
+      let isWalking = this.sprite.isWalking;
+
+      // Add to the sprite's current position by the speed constant
+      if (isWalking) {
         position.x += speed;
-        canOpen = false;
-        collisionDoor = null;
-        isWalking = true;
       }
 
+      // If the sprite leaves the right side of screen, reset to left side
       if (position.x > 1380) {
         position.x = -100;
         position.x += speed;
-        isWalking = true;
       }
 
+      // Sets the state to keep track of the Walker's position
       this.setState({
-        canOpen,
-        collisionDoor,
         isWalking,
         position,
       })
@@ -85,16 +78,12 @@ class Walker extends React.Component {
   }
 
   render() {
-    const currentDoorFrame = this.props.currentDoorFrame;
     const frames = this.frames;
-    const isOpening = this.state.isOpening;
     const isWalking = this.state.isWalking;
     const position = this.state.position;
     return (
       <WalkerSprite
         frames={frames}
-        currentDoorFrame={currentDoorFrame}
-        isOpening={isOpening}
         isWalking={isWalking}
         position={position}
         sprite={this.sprite}

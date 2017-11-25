@@ -15,6 +15,7 @@ class Prototype03 extends React.Component {
     this.state = {
       doorStatus: 'closed',
       fps: 0,
+      paused: false,
       walkers,
     };
   }
@@ -26,10 +27,28 @@ class Prototype03 extends React.Component {
   }
 
   componentWillUnMount() {
-    Game.stop();
+    this.stopGame();
   }
 
-  reactWalkers() {
+  startGame() {
+    Game.start();
+    this.setState({ paused: false });
+  }
+
+  stopGame() {
+    Game.stop();
+    this.setState({ paused: true });
+  }
+
+  toggleGame() {
+    if (this.state.paused) {
+      this.startGame();
+    } else {
+      this.stopGame();
+    }
+  }
+
+  renderWalkers() {
     return this.state.walkers.map(walker => (
       <Walker
         isWalking={walker.isWalking}
@@ -51,6 +70,7 @@ class Prototype03 extends React.Component {
     return (
       <div
         className="prototype"
+        onClick={this.toggleGame}
         ref={thisDiv => this.gameCanvas = thisDiv}
       >
         <Background
@@ -62,9 +82,8 @@ class Prototype03 extends React.Component {
           id={0}
           position={{ x: 1010, y: 528 }}
           scale={3}
-          walkers={this.reactWalkers()}
         />
-        {this.reactWalkers()}
+        {this.renderWalkers()}
         <Foreground
           position={{ x: 2, y: 0 }}
           scale={3}

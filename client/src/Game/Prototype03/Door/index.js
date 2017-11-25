@@ -17,16 +17,15 @@ class Door extends React.Component {
   }
 
   checkForCollisions() {
-    // const bump = new window.Bump(window.PIXI);
+    const bump = new window.Bump(window.PIXI);
 
     Game.ticker.add((delta) => {
-      const walkers = this.props.walkers;
-      // const door = this.sprite.getBounds();
+      const walkers = Game.stage.children.filter(sprite => sprite.class === "walker");
+      const door = this.sprite.hitArea;
       walkers.forEach((walker) => {
-        console.log(walker);
-        // if (bump.hitTestRectangle(walker.sprite, door.hitArea)) {
-          // do something
-        // }
+        if (bump.hitTestRectangle(door, walker.getBounds()) && walker.isWalking) {
+          walker.isWalking = false;
+        }
       });
     });
   }
